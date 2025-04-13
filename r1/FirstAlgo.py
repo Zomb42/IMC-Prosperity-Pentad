@@ -4,8 +4,7 @@ import statistics
 import jsonpickle # For saving/loading state
 import math
 
-# Set USE_JSONPICKLE to False if you encounter issues with it saving/loading state
-# Set it to True to enable saving price history between runs
+
 USE_JSONPICKLE = True
 
 class Trader:
@@ -373,5 +372,3 @@ class Trader:
         print(f"----- End Timestamp: {state.timestamp} -----")
 
         return result, conversions, traderData
-
-# --- END OF FILE FirstAlgo.py ---
