@@ -1,5 +1,5 @@
 import json
-from r2.datamodel import OrderDepth, TradingState, Order, Trade, Symbol, ProsperityEncoder
+from datamodel import OrderDepth, TradingState, Order, Trade, Symbol, ProsperityEncoder
 from typing import List, Dict, Tuple, Optional
 import math
 import collections
