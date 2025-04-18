@@ -258,27 +258,28 @@ class Trader:
         logger.log("  No conversion arbitrage opportunity found or executed.")
 
         # --- (Optional Placeholder: Basic Market Making if no arb) ---
-        # if conversions == 0 and not result[MAGNIFICENT_MACARONS]:
-        #     # Example: Place orders around mid-price if liquid market
-        #     mid_price = self.get_mid_price(mm_order_depth)
-        #     if mid_price is not None and exchange_best_bid is not None and exchange_best_ask is not None:
-        #         spread = max(2, exchange_best_ask - exchange_best_bid) # Adaptive spread?
-        #         mm_buy_price = math.floor(mid_price - spread / 2)
-        #         mm_sell_price = math.ceil(mid_price + spread / 2)
-        #         mm_order_size = 5 # Small size
-        #
-        #         # Place buy order if we have room
-        #         if max_additional_buy > 0:
-        #             vol = min(mm_order_size, max_additional_buy)
-        #             logger.log(f"    Placing MM Buy Order: {vol} @ {mm_buy_price}")
-        #             result[MAGNIFICENT_MACARONS].append(Order(MAGNIFICENT_MACARONS, mm_buy_price, vol))
-        #
-        #         # Place sell order if we have room
-        #         if max_additional_sell > 0:
-        #             vol = min(mm_order_size, max_additional_sell)
-        #             logger.log(f"    Placing MM Sell Order: {vol} @ {mm_sell_price}")
-        #             result[MAGNIFICENT_MACARONS].append(Order(MAGNIFICENT_MACARONS, mm_sell_price, -vol))
-        # --- End Optional MM ---
+        if conversions == 0 and not result[MAGNIFICENT_MACARONS]:
+            # Example: Place orders around mid-price if liquid market
+            mid_price = self.get_mid_price(mm_order_depth)
+            if mid_price is not None and exchange_best_bid is not None and exchange_best_ask is not None:
+                spread = max(2, exchange_best_ask - exchange_best_bid) # Adaptive spread?
+                mm_buy_price = math.floor(mid_price - spread / 2)
+                mm_sell_price = math.ceil(mid_price + spread / 2)
+                mm_order_size = 5 # Small size
+        
+                # Place buy order if we have room
+                if max_additional_buy > 0:
+                    vol = min(mm_order_size, max_additional_buy)
+                    logger.log(f"    Placing MM Buy Order: {vol} @ {mm_buy_price}")
+                    result[MAGNIFICENT_MACARONS].append(Order(MAGNIFICENT_MACARONS, mm_buy_price, vol))
+        
+                # Place sell order if we have room
+                if max_additional_sell > 0:
+                    vol = min(mm_order_size, max_additional_sell)
+                    logger.log(f"    Placing MM Sell Order: {vol} @ {mm_sell_price}")
+                    result[MAGNIFICENT_MACARONS].append(Order(MAGNIFICENT_MACARONS, mm_sell_price, -vol))
+         
+        #--- End Optional MM ---
 
 
         # --- Final Logging and Return ---
